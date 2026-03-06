@@ -1,5 +1,5 @@
 services:
-  # Backend Web Service
+  # Backend Web Service (Node.js)
   - type: web
     name: portfolio-backend-tekeng
     runtime: node
@@ -15,11 +15,11 @@ services:
       - key: EMAIL_PASS
         sync: false
 
-  # Frontend Static Site
+  # Frontend Static Site (React)
+  # Static sites on Render are always free and don't require the 'plan' field.
   - type: web
     name: portfolio-frontend-tekeng
     runtime: static
-    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
