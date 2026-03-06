@@ -3,6 +3,7 @@ services:
   - type: web
     name: portfolio-backend-tekeng
     runtime: node
+    plan: free
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
@@ -18,6 +19,7 @@ services:
   - type: web
     name: portfolio-frontend-tekeng
     runtime: static
+    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
