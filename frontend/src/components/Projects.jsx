@@ -6,6 +6,8 @@ import accidentImg from '../assets/accident.jpeg';
 import malwareImg from '../assets/malware.jpeg';
 import cybersecurityImg from '../assets/cybesecurity.jpeg';
 import campusImg from '../assets/campus.jpeg';
+import javaImg from '../assets/java.jpeg';
+
 
 const Projects = () => {
     const { t } = useLanguage();
@@ -44,7 +46,7 @@ const Projects = () => {
             title: t('proj4Title'),
             desc: t('proj4Desc'),
             tech: ['React', 'Node.js', 'Firebase'],
-            image: campusImg,
+            // image: campusImg,
             category: 'Web',
             github: 'https://github.com/Rean64/S-CAMP',
             live: '#',
@@ -54,7 +56,7 @@ const Projects = () => {
             title: t('proj5Title'),
             desc: t('proj5Desc'),
             tech: ['Java', 'Swing', 'SQL'],
-            image: malwareImg,
+            image: javaImg,
             category: 'Desktop',
             github: 'https://github.com/TekengYvan/cosmetic_pro',
             live: '#',
@@ -64,17 +66,17 @@ const Projects = () => {
             title: t('proj6Title'),
             desc: t('proj6Desc'),
             tech: ['PHP', 'JavaScript', 'SQL'],
-            image: accidentImg,
+            // image: accidentImg,
             category: 'Web',
             github: 'https://github.com/Rean64/IAI-PROJECT',
             live: '#',
-            status: t('statusCompleted')
+            status: t('statusInProgress')
         },
         {
             title: t('proj7Title'),
             desc: t('proj7Desc'),
             tech: ['Mobile', 'Orders', 'Web'],
-            image: malwareImg,
+            // image: malwareImg,
             category: 'Mobile',
             github: 'https://github.com/Rean64/contour',
             live: '#',

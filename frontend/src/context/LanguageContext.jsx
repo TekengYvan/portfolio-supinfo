@@ -52,7 +52,7 @@ export const LanguageProvider = ({ children }) => {
                 proj6Title: 'IAI-PROJECT (Portail Assurance)',
                 proj6Desc: 'Portail académique de gestion d\'assurance scolaire, incluant le suivi et les services étudiants.',
                 proj7Title: 'Contour (Service Cordonnerie)',
-                proj7Desc: 'Plateforme en ligne permettant de commander des services de cordonnerie et de lavage de chaussures en ligne.',
+                proj7Desc: 'Plateforme en ligne permettant de commander des services de cordonnerie et de lavage de chaussures et de vetements en ligne.',
                 // Status
                 statusCompleted: 'Terminé',
                 statusInProgress: 'En cours',
