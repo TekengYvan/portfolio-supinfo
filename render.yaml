@@ -2,7 +2,7 @@ services:
   # Backend Web Service
   - type: web
     name: portfolio-backend-tekeng
-    env: node
+    runtime: node
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
@@ -17,10 +17,10 @@ services:
   # Frontend Static Site
   - type: web
     name: portfolio-frontend-tekeng
-    env: static
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishDir: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         fromService:
