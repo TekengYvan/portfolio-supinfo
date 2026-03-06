@@ -17,8 +17,9 @@ services:
         value: 20
 
   # Frontend
-  - type: static
+  - type: web
     name: portfolio-frontend-tekeng
+    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishDir: dist
