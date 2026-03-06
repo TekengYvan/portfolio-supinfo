@@ -1,4 +1,4 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { Sun, Moon, Globe, Menu, X } from 'lucide-react';
