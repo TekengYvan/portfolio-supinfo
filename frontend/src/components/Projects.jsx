@@ -5,6 +5,7 @@ import { Github, ExternalLink, Filter } from 'lucide-react';
 import accidentImg from '../assets/accident.jpeg';
 import malwareImg from '../assets/malware.jpeg';
 import cybersecurityImg from '../assets/cybesecurity.jpeg';
+import campusImg from '../assets/campus.jpeg';
 
 const Projects = () => {
     const { t } = useLanguage();
@@ -36,7 +37,48 @@ const Projects = () => {
             image: cybersecurityImg,
             category: 'Security',
             github: '#',
-            live: '#'
+            live: '#',
+            status: t('statusCompleted')
+        },
+        {
+            title: t('proj4Title'),
+            desc: t('proj4Desc'),
+            tech: ['React', 'Node.js', 'Firebase'],
+            image: campusImg,
+            category: 'Web',
+            github: 'https://github.com/Rean64/S-CAMP',
+            live: '#',
+            status: t('statusGroup')
+        },
+        {
+            title: t('proj5Title'),
+            desc: t('proj5Desc'),
+            tech: ['Java', 'Swing', 'SQL'],
+            image: malwareImg,
+            category: 'Desktop',
+            github: 'https://github.com/TekengYvan/cosmetic_pro',
+            live: '#',
+            status: t('statusCompleted')
+        },
+        {
+            title: t('proj6Title'),
+            desc: t('proj6Desc'),
+            tech: ['PHP', 'JavaScript', 'SQL'],
+            image: accidentImg,
+            category: 'Web',
+            github: 'https://github.com/Rean64/IAI-PROJECT',
+            live: '#',
+            status: t('statusCompleted')
+        },
+        {
+            title: t('proj7Title'),
+            desc: t('proj7Desc'),
+            tech: ['Mobile', 'Orders', 'Web'],
+            image: malwareImg,
+            category: 'Mobile',
+            github: 'https://github.com/Rean64/contour',
+            live: '#',
+            status: t('statusInProgress')
         }
     ];
 
@@ -45,6 +87,7 @@ const Projects = () => {
         { id: 'Web', label: t('catWeb') },
         { id: 'Mobile', label: t('catMobile') },
         { id: 'Security', label: t('catSecurity') },
+        { id: 'Desktop', label: t('catDesktop') },
     ];
     const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
@@ -88,7 +131,14 @@ const Projects = () => {
                                 </div>
                             </div>
                             <div className="p-6">
-                                <h3 className="font-bold text-xl mb-2">{project.title}</h3>
+                                <div className="flex justify-between items-start mb-2">
+                                    <h3 className="font-bold text-xl">{project.title}</h3>
+                                    {project.status && (
+                                        <span className="text-[10px] bg-primary-light/20 text-primary-light px-2 py-1 rounded-full font-bold">
+                                            {project.status}
+                                        </span>
+                                    )}
+                                </div>
                                 <p className="text-slate-600 dark:text-slate-300 text-sm mb-4 leading-relaxed font-medium">{project.desc}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {project.tech.map(t => (
