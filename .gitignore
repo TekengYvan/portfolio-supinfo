@@ -19,3 +19,5 @@ pnpm-debug.log*
 .vscode/
 .idea/
 .gemini/
+
+.codex-tools/
