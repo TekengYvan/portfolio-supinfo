@@ -15,6 +15,7 @@ function createApp({ mailer, settings = {} } = {}) {
   const defaultOrigins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://tekengyvan-portfolio.vercel.app",
     "https://portfolio-supinfo.onrender.com",
     "https://portfolio-frontend-tekeng.onrender.com",
   ];

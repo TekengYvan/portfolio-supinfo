@@ -124,9 +124,10 @@ test("rejects unwanted origins and rate-limits repeated requests", async () =>
     for (let n = 0; n < 5; n++) assert.equal((await post(valid)).status, 503);
     assert.equal((await post(valid)).status, 429);
   }));
-test("allows the deployed Render frontend origins", async () =>
+test("allows the deployed frontend origins", async () =>
   run({}, async ({ base }) => {
     for (const origin of [
+      "https://tekengyvan-portfolio.vercel.app",
       "https://portfolio-supinfo.onrender.com",
       "https://portfolio-frontend-tekeng.onrender.com",
     ]) {
