@@ -88,7 +88,7 @@ export default function ContactForm({ language }) {
     }
     setStatus("sending");
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
+    const timeout = setTimeout(() => controller.abort(), 25000);
     try {
       const response = await fetch(apiBase + "/api/contact", {
         method: "POST",
@@ -99,6 +99,14 @@ export default function ContactForm({ language }) {
       if (response.status === 503) {
         setAvailable(false);
         setStatus("draft");
+        return;
+      }
+      if (response.status === 429) {
+        setStatus("rate");
+        return;
+      }
+      if (response.status === 400) {
+        setStatus("invalid");
         return;
       }
       if (!response.ok) throw new Error("delivery");
@@ -259,6 +267,24 @@ export default function ContactForm({ language }) {
               {t(
                 "Choisissez une date et une heure futures.",
                 "Choose a future date and time.",
+              )}
+            </p>
+          )}
+          {status === "rate" && (
+            <p className="form-error">
+              <AlertCircle size={18} />
+              {t(
+                "Trop de tentatives rapprochées. Patientez 15 minutes avant de réessayer.",
+                "Too many recent attempts. Please wait 15 minutes before trying again.",
+              )}
+            </p>
+          )}
+          {status === "invalid" && (
+            <p className="form-error">
+              <AlertCircle size={18} />
+              {t(
+                "Certaines informations ne sont pas valides. Vérifiez tous les champs.",
+                "Some information is invalid. Please check every field.",
               )}
             </p>
           )}

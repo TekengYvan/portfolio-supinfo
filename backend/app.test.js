@@ -52,7 +52,13 @@ test("delivers to the owner and uses visitor email only as reply-to", async () =
       assert.equal((await response.json()).status, "sent");
       assert.equal(message.from, "sender@example.com");
       assert.equal(message.to, "tekengyvan2@gmail.com");
-      assert.equal(message.replyTo, "visitor@example.com");
+      assert.deepEqual(message.replyTo, {
+        name: "Test Visitor",
+        address: "visitor@example.com",
+      });
+      assert.match(message.subject, /New portfolio message/);
+      assert.match(message.html, /YVAN\.TEKENG/);
+      assert.match(message.html, /Reply to Test Visitor/);
       assert.ok(message.text.includes(valid.message));
     },
   );

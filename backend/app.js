@@ -1,6 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const escapeHtml = (value) =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 function createApp({ mailer, settings = {} } = {}) {
   const app = express();
   app.disable("x-powered-by");
@@ -91,21 +98,38 @@ function createApp({ mailer, settings = {} } = {}) {
     if (!configured)
       return res.status(503).json({ error: "mail_not_configured" });
     try {
+      const name = data.name.trim();
+      const email = data.email.trim();
+      const subject = data.subject.trim();
+      const message = data.message.trim();
+      const isMeeting = data.kind === "appointment";
+      const receivedAt = new Intl.DateTimeFormat("en-GB", {
+        dateStyle: "full",
+        timeStyle: "short",
+        timeZone: "Africa/Douala",
+      }).format(new Date());
+      const meetingHtml = isMeeting
+        ? `<div style="margin:20px 0;padding:16px;border-left:4px solid #f97316;background:#fff7ed"><strong>Requested meeting</strong><br>${escapeHtml(data.date)} at ${escapeHtml(data.time)} · Cameroon time (UTC+1)<br><small>This appointment is pending your confirmation.</small></div>`
+        : "";
       const result = await mailer.sendMail({
         from: settings.from,
         to: settings.to || "tekengyvan2@gmail.com",
-        replyTo: data.email.trim(),
+        replyTo: { name, address: email },
         subject:
-          (data.kind === "appointment" ? "[Rendez-vous] " : "[Portfolio] ") +
-          data.subject.trim(),
+          (isMeeting ? "📅 Meeting request · " : "✦ New portfolio message · ") +
+          subject,
         text: [
-          "Name: " + data.name.trim(),
-          "Email: " + data.email.trim(),
+          "New message from your portfolio",
+          "Name: " + name,
+          "Email: " + email,
+          "Subject: " + subject,
           meeting,
-          data.message.trim(),
+          message,
+          "Received: " + receivedAt + " (Africa/Douala)",
         ]
           .filter(Boolean)
           .join("\n\n"),
+        html: `<!doctype html><html><body style="margin:0;background:#f4f1ea;font-family:Arial,sans-serif;color:#171717"><div style="max-width:640px;margin:0 auto;padding:32px 16px"><div style="background:#171717;color:#fff;padding:28px;border-radius:18px 18px 0 0"><div style="color:#fb923c;font-size:12px;font-weight:700;letter-spacing:2px">YVAN.TEKENG · PORTFOLIO</div><h1 style="margin:12px 0 4px;font-size:26px">${isMeeting ? "New meeting request" : "You received a new message"}</h1><p style="margin:0;color:#d4d4d4">Sent from your portfolio contact form</p></div><div style="background:#fff;padding:28px;border:1px solid #e5e5e5;border-top:0"><table style="width:100%;border-collapse:collapse"><tr><td style="padding:8px 0;color:#737373;width:90px">From</td><td style="padding:8px 0;font-weight:700">${escapeHtml(name)}</td></tr><tr><td style="padding:8px 0;color:#737373">Email</td><td style="padding:8px 0"><a style="color:#ea580c" href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr><tr><td style="padding:8px 0;color:#737373">Subject</td><td style="padding:8px 0">${escapeHtml(subject)}</td></tr></table>${meetingHtml}<div style="margin:22px 0;padding:20px;background:#fafafa;border-radius:12px;white-space:pre-wrap;line-height:1.65">${escapeHtml(message)}</div><a href="mailto:${escapeHtml(email)}?subject=${encodeURIComponent("Re: " + subject)}" style="display:inline-block;background:#ea580c;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:999px">Reply to ${escapeHtml(name)}</a><p style="margin:24px 0 0;color:#737373;font-size:12px">Received ${escapeHtml(receivedAt)} · Africa/Douala</p></div></div></body></html>`,
       });
       if (!result.accepted?.length) throw new Error("not_accepted");
       res.json({ status: "sent", kind: data.kind });
