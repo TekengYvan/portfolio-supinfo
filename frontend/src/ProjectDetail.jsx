@@ -12,13 +12,7 @@ export default function ProjectDetail({ project, projects, language, onSelect, o
   const gallery = project.gallery || (project.image ? [{ src: project.image, caption: project.caption }] : []);
   const related = [...projects.filter(p => p.slug !== project.slug && p.category === project.category), ...projects.filter(p => p.slug !== project.slug && p.category !== project.category)].slice(0, 3);
   useEffect(() => { heading.current?.focus({ preventScroll: true }); window.scrollTo(0, 0); }, [project.slug]);
-  useEffect(() => {
-    const dialog = zoom.current;
-    const unlock = () => { document.body.style.overflow = ""; };
-    dialog?.addEventListener("close", unlock);
-    return () => { dialog?.removeEventListener("close", unlock); unlock(); };
-  }, []);
-  function openImage(index) { setSlide(index); zoom.current?.showModal(); document.body.style.overflow = "hidden"; }
+  function openImage(index) { setSlide(index); zoom.current?.showModal(); }
   const advance = delta => setSlide(current => (current + delta + gallery.length) % gallery.length);
   const paragraphs = (project.about?.[i] || project.description[i]).split("\n\n");
   return (

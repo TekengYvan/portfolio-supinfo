@@ -1,6 +1,6 @@
 # Portfolio — Yvan Tekeng
 
-Portfolio React/Vite bilingue FR/EN inspiré de https://kencode.dev/, avec 14 fiches projet, galeries, portrait, animation du nom et thèmes clair, sombre et système.
+Portfolio React/Vite bilingue FR/EN inspiré de https://kencode.dev/, avec 14 fiches projet, galeries complètes, portrait, animation du nom et thèmes clair, sombre et système.
 
 ## Démarrer
 
@@ -22,7 +22,7 @@ Le frontend est disponible sur http://localhost:5173. Vite transmet les appels /
 
 Copier backend/.env.example vers backend/.env si ce fichier est absent. Pour Gmail, renseigner EMAIL_USER et EMAIL_PASS avec un mot de passe d’application Gmail, puis redémarrer le backend. Ne jamais publier ce fichier ni partager le secret. Les paramètres SMTP_HOST, SMTP_PORT et SMTP_SECURE permettent un autre serveur SMTP.
 
-Les messages sont adressés à tekengyvan2@gmail.com. Les rendez-vous sont des demandes avec date et heure du Cameroun (UTC+1), à confirmer personnellement ; aucun créneau n’est réservé automatiquement.
+Les messages sont adressés à tekengyvan2@gmail.com. En production, ajouter `EMAIL_USER`, `EMAIL_PASS` et `FRONTEND_ORIGIN` dans l’environnement du service backend Render (ne pas mettre ces secrets dans Git). Les rendez-vous sont des demandes avec date et heure du Cameroun (UTC+1), à confirmer personnellement ; aucun créneau n’est réservé automatiquement.
 
 Sans serveur email configuré, le formulaire prépare un email dans la messagerie du visiteur et indique clairement qu’il reste à l’envoyer. Une confirmation d’envoi direct apparaît seulement après acceptation par le transport email.
 
@@ -56,4 +56,4 @@ npm.cmd --prefix frontend run build
 npm.cmd --prefix backend test
 ```
 
-Vérifications effectuées : 14 fiches, 25 vues de galerie, zoom et Échap, six filtres, navigation directe et historique, montage Lifeline, thèmes et changements du système, largeurs 320–1440 px, animation et réduction des mouvements, FR/EN, deux CV, formulaires et validation des dates. Sept tests backend couvrent validation, destinataire fixe, limites de requêtes et échecs SMTP. Les tests d’envoi utilisent des simulations ; aucun email réel n’a été envoyé.
+Vérifications effectuées : 14 fiches, plus de 130 vues de galerie, zoom et Échap, six filtres, navigation directe et historique, photos du prototype Lifeline, thèmes et changements du système, largeurs 320–1440 px, animation et réduction des mouvements, FR/EN, deux CV, formulaires et validation des dates. Sept tests backend couvrent validation, destinataire fixe, limites de requêtes et échecs SMTP. Les tests d’envoi utilisent des simulations ; aucun email réel n’a été envoyé.

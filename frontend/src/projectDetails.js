@@ -2,6 +2,18 @@ const screenshot = (src, fr, en) => ({
   src: "/images/" + src,
   caption: [fr, en],
 });
+const galleryScreens = (project, files) =>
+  files.map((file) => {
+    const label = file
+      .replace(/\.(jpg|jpeg|png)$/i, "")
+      .replace(/^[^-]+-/, "")
+      .replaceAll("-", " ");
+    return screenshot(
+      "gallery/" + file,
+      `${project} · ${label}`,
+      `${project} · ${label}`,
+    );
+  });
 export const projectDetails = {
   NextLuk: {
     slug: "nextluk",
@@ -60,6 +72,12 @@ export const projectDetails = {
         "Application mobile · Vue sombre du jumeau numérique",
         "Mobile application · Dark digital twin view",
       ),
+      ...galleryScreens("NextLuk", [
+        "nextluk-home.jpg", "nextluk-signup.jpg", "nextluk-DashboardHome.jpg",
+        "nextluk-ProfessionalStats.jpg", "nextluk-Services.jpg", "nextluk-Bookings.jpg",
+        "nextluk-Portfolio.jpg", "nextluk-Products.jpg", "nextluk-Orders.jpg",
+        "nextluk-Messages.jpg", "nextluk-Settings.jpg",
+      ]),
     ],
   },
   Munagay: {
@@ -98,6 +116,12 @@ export const projectDetails = {
         "Écran d’essayage virtuel · Aperçu local",
         "Virtual try-on screen · Local preview",
       ),
+      ...galleryScreens("Hair Salon", [
+        "hair-salon-home.jpg", "hair-salon-register.jpg", "hair-salon-profile.jpg",
+        "hair-salon-map.jpg", "hair-salon-salon.jpg", "hair-salon-booking.jpg",
+        "hair-salon-appointments.jpg", "hair-salon-dashboard.jpg",
+        "hair-salon-chats.jpg", "hair-salon-tryon.jpg",
+      ]),
     ],
   },
   "Real Estate": {
@@ -129,6 +153,11 @@ export const projectDetails = {
         "Accueil de la plateforme immobilière",
         "Real estate platform home",
       ),
+      ...galleryScreens("Real Estate", [
+        "real-estate-home.jpg", "real-estate-login.jpg", "real-estate-register.jpg",
+        "real-estate-CLIENT.jpg", "real-estate-LANDLORD.jpg", "real-estate-ADMIN.jpg",
+        "real-estate-Demandes.jpg", "real-estate-Contrats.jpg", "real-estate-chat.jpg",
+      ]),
     ],
   },
   "Lifeline Saver": {
@@ -179,6 +208,16 @@ export const projectDetails = {
         "Lifeline Saver · Écran de connexion",
         "Lifeline Saver · Sign-in screen",
       ),
+      screenshot(
+        "gallery/lifeline-presentation.jpeg",
+        "Présentation publique du prototype automobile Lifeline Saver",
+        "Public presentation of the Lifeline Saver vehicle prototype",
+      ),
+      screenshot(
+        "gallery/lifeline-sensor-car.jpeg",
+        "Prototype automobile · Capteurs montés à l’avant du véhicule",
+        "Vehicle prototype · Sensors mounted at the front of the vehicle",
+      ),
     ],
   },
   "Prep Concours": {
@@ -218,6 +257,14 @@ export const projectDetails = {
         "Outils et parcours de préparation",
         "Preparation tools and learning paths",
       ),
+      ...galleryScreens("Prep Concours", [
+        "prep-concours-CatalogueView.jpg", "prep-concours-ResourceLibraryView.jpg",
+        "prep-concours-PastPapersView.jpg", "prep-concours-AiQuizGenView.jpg",
+        "prep-concours-FlashcardsView.jpg", "prep-concours-OralSimulatorView.jpg",
+        "prep-concours-OrientationView.jpg", "prep-concours-CalendarView.jpg",
+        "prep-concours-ForumView.jpg", "prep-concours-MentalHealthView.jpg",
+        "prep-concours-PricingView.jpg",
+      ]),
     ],
   },
   JobLink: {
@@ -249,6 +296,11 @@ export const projectDetails = {
         "Portail administrateur · Connexion",
         "Administration portal · Sign in",
       ),
+      ...galleryScreens("JobLink", [
+        "joblink-overview.jpg", "joblink-users.jpg", "joblink-categories.jpg",
+        "joblink-verification.jpg", "joblink-payments.jpg", "joblink-cases.jpg",
+        "joblink-settings.jpg",
+      ]),
     ],
   },
   SafeMarket: {
@@ -286,6 +338,12 @@ export const projectDetails = {
         "SafeMarket · Catalogue public",
         "SafeMarket · Public catalogue",
       ),
+      ...galleryScreens("SafeMarket", [
+        "safemarket-home.jpg", "safemarket-marketplace.jpg", "safemarket-spotlight.jpg",
+        "safemarket-sale.jpg", "safemarket-about.jpg", "safemarket-blog.jpg",
+        "safemarket-contact.jpg", "safemarket-login.jpg", "safemarket-register.jpg",
+        "safemarket-reset.jpg",
+      ]),
     ],
   },
   "SmartBell · ESP32": {
@@ -323,6 +381,12 @@ export const projectDetails = {
         "SmartBell · Accès à l’application",
         "SmartBell · Application access",
       ),
+      ...galleryScreens("SmartBell", [
+        "smartbell-dashboard.jpg", "smartbell-setjadwal.jpg", "smartbell-history.jpg",
+        "smartbell-notification.jpg", "smartbell-profile.jpg", "smartbell-statistic.jpg",
+        "smartbell-sound-management.jpg", "smartbell-user-management.jpg",
+        "smartbell-audit-log.jpg",
+      ]),
     ],
   },
   "Cosmetic Pro": {
@@ -350,6 +414,13 @@ export const projectDetails = {
         "SQL data persistence",
       ],
     ],
+    gallery: galleryScreens("Cosmetic Pro", [
+      "cosmetic-pro-Login.png", "cosmetic-pro-pass.png", "cosmetic-pro-Regular1.png",
+      "cosmetic-pro-regular.png", "cosmetic-pro-add.png", "cosmetic-pro-Manage.png",
+      "cosmetic-pro-ManageP.png", "cosmetic-pro-ManagePR.png", "cosmetic-pro-admin.png",
+      "cosmetic-pro-Superadmin.png", "cosmetic-pro-stock.png", "cosmetic-pro-ware.png",
+      "cosmetic-pro-financial.png",
+    ]),
   },
   "S-CAMP": {
     slug: "s-camp",
@@ -373,6 +444,11 @@ export const projectDetails = {
         "Team-based software design",
       ],
     ],
+    gallery: galleryScreens("S-CAMP", [
+      "s-camp-landingPage.jpg", "s-camp-about.jpg", "s-camp-register.jpg",
+      "s-camp-signup.jpg", "s-camp-editprofile.jpg", "s-camp-payment.jpg",
+      "s-camp-portfolio-landingPage-php.jpg", "s-camp-portfolio-about-php.jpg",
+    ]),
   },
   "IAI · Portail assurance": {
     slug: "iai-assurance",
@@ -407,6 +483,11 @@ export const projectDetails = {
         "Portail IAI · Écran d’inscription",
         "IAI portal · Registration screen",
       ),
+      ...galleryScreens("Portail assurance IAI", [
+        "iai-assurance-portfolio-index-php.jpg", "iai-assurance-portfolio-home-php.jpg",
+        "iai-assurance-portfolio-login-php.jpg", "iai-assurance-signup-php.jpg",
+        "iai-assurance-pdf-html.jpg",
+      ]),
     ],
   },
   Contour: {
@@ -443,6 +524,10 @@ export const projectDetails = {
         "Contour · À propos du service",
         "Contour · About the service",
       ),
+      ...galleryScreens("Contour", [
+        "contour-portfolio-home-php.jpg", "contour-about-php.jpg",
+        "contour-services-php.jpg", "contour-signup-php.jpg",
+      ]),
     ],
   },
   "Malware Detection": {
@@ -464,6 +549,17 @@ export const projectDetails = {
         "Classification for threat identification",
         "Practical Python use in cybersecurity",
       ],
+    ],
+    gallery: [
+      screenshot(
+        "gallery/malware-cybersecurity-lab.jpeg",
+        "Environnement d’expérimentation en cybersécurité",
+        "Cybersecurity experimentation environment",
+      ),
+    ],
+    galleryNote: [
+      "Photo de travail issue du portfolio initial. Les captures de l’outil d’analyse ne sont pas disponibles actuellement.",
+      "Work photo from the original portfolio. Screenshots of the analysis tool are not currently available.",
     ],
   },
 };
@@ -521,5 +617,11 @@ export const mboa360 = {
       "Mboa360 · Parcours culturels de l’accueil",
       "Mboa360 · Cultural paths on the home page",
     ),
+    ...galleryScreens("Mboa360", [
+      "mboa360-home.jpg", "mboa360-explore.jpg", "mboa360-culture.jpg",
+      "mboa360-events.jpg", "mboa360-collections.jpg", "mboa360-tour.jpg",
+      "mboa360-languages.jpg", "mboa360-community.jpg", "mboa360-profile.jpg",
+      "mboa360-admin.jpg",
+    ]),
   ],
 };
