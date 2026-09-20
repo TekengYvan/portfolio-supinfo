@@ -118,6 +118,19 @@ test("rejects unwanted origins and rate-limits repeated requests", async () =>
     for (let n = 0; n < 5; n++) assert.equal((await post(valid)).status, 503);
     assert.equal((await post(valid)).status, 429);
   }));
+test("allows the deployed Render frontend origins", async () =>
+  run({}, async ({ base }) => {
+    for (const origin of [
+      "https://portfolio-supinfo.onrender.com",
+      "https://portfolio-frontend-tekeng.onrender.com",
+    ]) {
+      const response = await fetch(base + "/api/contact/config", {
+        headers: { Origin: origin },
+      });
+      assert.equal(response.status, 200);
+      assert.equal(response.headers.get("access-control-allow-origin"), origin);
+    }
+  }));
 test("delivery failures never become success responses", async () => {
   for (const mailer of [
     {

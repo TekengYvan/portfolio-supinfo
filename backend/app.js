@@ -5,13 +5,17 @@ function createApp({ mailer, settings = {} } = {}) {
   const app = express();
   app.disable("x-powered-by");
   const configured = Boolean(mailer);
-  const allowed = (
-    settings.origins ||
-    process.env.FRONTEND_ORIGIN ||
-    "http://localhost:5173,http://127.0.0.1:5173"
-  )
+  const defaultOrigins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://portfolio-supinfo.onrender.com",
+    "https://portfolio-frontend-tekeng.onrender.com",
+  ];
+  const configuredOrigins = (settings.origins || process.env.FRONTEND_ORIGIN || "")
     .split(",")
-    .map((x) => x.trim());
+    .map((x) => x.trim().replace(/\/$/, ""))
+    .filter(Boolean);
+  const allowed = [...new Set([...defaultOrigins, ...configuredOrigins])];
   app.use(
     cors({
       origin(origin, callback) {
